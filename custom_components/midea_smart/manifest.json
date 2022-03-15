@@ -1,9 +1,11 @@
 {
-        "domain": "midea_ac",
-        "name": "Midea Smart Aircon",
+        "domain": "midea_smart",
+        "name": "Midea Smart Home",
         "version": "0.2.2",
         "documentation": "",
         "requirements": ["msmart==0.2.2", "pycryptodome", "pycryptodomex", "click"],
         "dependencies": [],
+        "config_flow": true,
+        "iot_class": "local_polling",
         "codeowners": ["@mac-zhou"]
 }

@@ -1,3 +1,6 @@
+import logging
+_LOGGER = logging.getLogger(__name__)
+
 import voluptuous as vol
 from datetime import timedelta
 
@@ -6,6 +9,12 @@ from homeassistant.components.climate import PLATFORM_SCHEMA
 from homeassistant.helpers.restore_state import RestoreEntity
 from homeassistant.helpers.entity import Entity
 
+from .const import (
+    KEY_COORDINATOR,
+    KEY_ENTITIES,
+    DOMAIN
+    )
+from . import MideaEntity, get_midea_config
 
 try:
     from homeassistant.components.sensor import SensorEntity
@@ -66,35 +75,31 @@ async def async_setup_platform(hass, config, async_add_entities,
 
     async_add_entities(entities)
 
-class MideaWasherDevice(SensorEntity, RestoreEntity):
+async def async_setup_entry(hass, config_entry, async_add_entities):
+    """Set up the Midea Smart device from a config entry."""
+    coordinator = hass.data[DOMAIN][config_entry.entry_id][KEY_COORDINATOR]
+    config_type = config_entry.data[CONF_TYPE]
+    entities = []
+    for entity_key, config in get_midea_config(config_type, KEY_ENTITIES).items():
+        if config["type"] == "sensor":
+            _LOGGER.debug("add sensor device", entity_key, config)
+            entities.append(MideaWasherDevice(coordinator, entity_key))
 
-    def __init__(self, hass, device):
-        """Initialize the washer device."""
+    async_add_entities(entities)
 
-        self._device = device
+class MideaWasherDevice(MideaEntity, SensorEntity, RestoreEntity):
 
-        self.hass = hass
+    def __init__(self, coordinator, entity_key):
+        """Initialize the Midea device."""
+        super().__init__(coordinator, entity_key)
+
         self._old_state = None
         self._changed = False
     
-    async def async_added_to_hass(self):
-        """Run when entity about to be added."""
-        await super().async_added_to_hass()
-        self._old_state = await self.async_get_last_state()
-    
-    async def async_update(self):
-        """Update the state."""
-        await self.hass.async_add_executor_job(self._device.refresh)
-    
-    @property
-    def name(self):
-        """Return the name of the device."""
-        return "midea_{:2x}_{}".format(self._device._type, self._device.id)
-
-    @property
-    def icon(self):
-        """Return the icon to use in the frontend, if any."""
-        return 'mdi:washing-machine'
+    # async def async_added_to_hass(self):
+    #     """Run when entity about to be added."""
+    #     await super().async_added_to_hass()
+    #     self._old_state = await self.async_get_last_state()
 
     @property
     def native_value(self):
