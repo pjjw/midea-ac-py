@@ -1,0 +1,55 @@
+{
+    "config": {
+        "abort": {
+            "already_configured": "Device is already configured",
+            "already_in_progress": "Configuration flow is already in progress",
+            "no_found_devices": "No available Midea Smart devices found on the network",
+            "unspported_device": "Unsupported device"
+        },
+        "error": {
+            "no_device_selected": "No device selected, please select one device.",
+            "unknown_device": "The device model is not known, not able to setup the device using config flow.",
+            "device_auth_error": "Connet Device have some error, please check the input.",
+            "device_auth_fail": "Device authentication failed, please check the intput.",
+            "cloud_auth_fail": "Midea Colud authentication failed, please check the intput.",
+            "cloud_account_empty": "account or password is empty, please check the intput.",
+            "token_key_empty": "token and key is empty, please check the intput.",
+            "verify_failed": "Device verify failed, please check the intput."
+        },
+        "step": {
+            "cloud": {
+                "title": "Get Token and Key",
+                "description": "Login Midea Cloud to get device's token and key(k1).",
+                "data": {
+                    "cloud_password": "Midea Cloud password",
+                    "cloud_username": "Midea Cloud username",
+                    "use_open_account": "Use Default Open Account."
+                }
+            },
+            "device_info": {
+                "title": "Device Info",
+                "description": {
+                    "default": "Please input the device's information."
+                },
+                "data": {
+                    "version": "Device Firmware Version",
+                    "name": "Name",
+                    "type": "Device Type",
+                    "host": "IP Address",
+                    "port": "Port",
+                    "id": "Device ID",
+                    "token": "Device Token",
+                    "key": "Device Key(K1)"
+                }
+            },
+            "select": {
+                "title": "New device found",
+                "description": "Choose a device to setup"
+            },
+            "user": {
+                "title": "Select Operation",
+                "description": ""
+            }
+        }
+    }
+}

@@ -1,0 +1,55 @@
+{
+	"config": {
+		"abort": {
+			"already_configured": "设备已存在",
+			"already_in_progress": "已经在配置",
+			"no_found_devices": "没有找到相关设备",
+			"unspported_device": "暂不支持此类型设备"
+		},
+		"error": {
+			"no_device_selected": "请至少选择1个设备",
+			"unknown_device": "未知设备型号，无法配置",
+			"device_auth_error": "连接发生错误，请正确输入设备信息",
+			"device_auth_fail": "设备认证失败，请正确输入设备信息",
+			"cloud_auth_fail": "美的云认证失败，请正确输入登录信息",
+			"cloud_account_empty": "账号或者密码为空，请正确输入登录信息",
+			"token_key_empty": "token或者key为空, 美的云认证失败，请正确输入登录信息",
+			"verify_failed": "设备验证失败，请检查配置信息"
+		},
+		"step": {
+			"cloud": {
+				"title": "获取设备Token和Key",
+				"description": "登陆美的云(非美的美居APP)",
+				"data": {
+					"cloud_password": "密码",
+					"cloud_username": "用户名",
+					"use_open_account": "使用内置的账号(推荐)"
+				}
+			},
+			"device_info": {
+				"title": "设备信息",
+				"description": {
+					"default": "请输入设备信息"
+				},
+				"data": {
+					"version": "设备固件版本",
+					"name": "名称",
+					"type": "设备类型",
+					"host": "IP地址",
+					"port": "端口",
+					"id": "设备ID",
+					"token": "设备Token",
+					"key": "设备Key(K1)"
+				}
+			},
+			"select": {
+				"title": "已找到设备",
+				"description": "选择要设置的设备"
+			},
+			"user": {
+				"title": "选择操作",
+				"description": ""
+			}
+		}
+	}
+}
